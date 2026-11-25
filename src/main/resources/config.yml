@@ -1,0 +1,90 @@
+# ============================================================================
+# NusaSawit Configuration
+# Target: Paper / NusaSpigot 1.21.11 | Soft-Dependencies: Nexo, Vault
+# ============================================================================
+
+nexo:
+  # Automatically copy custom textures, 3D JSON models, and items/nusasawit.yml
+  # into plugins/Nexo/ when Nexo is installed on the server.
+  auto-sync-pack: true
+  overwrite-existing: false
+
+quest:
+  # Number of natural logs a player must chop to unlock the Oil Palm License
+  # and receive 1 free starter Bibit Sawit Tenera.
+  required-blocks: 20000
+  # Every additional N natural logs chopped after 20,000 grants +1 bonus seed.
+  # Set to 0 to disable recurring milestone seeds.
+  milestone-interval: 10000
+  # Block materials counted toward the chopping quest (natural blocks only).
+  valid-log-materials:
+    - OAK_LOG
+    - OAK_WOOD
+  # Show ActionBar progress every N blocks chopped (1 = every block).
+  actionbar-every: 1
+
+farming:
+  # Growth durations in seconds:
+  # Stage 1 (Seedling) -> Stage 2 (Young Palm)
+  stage-1-seconds: 300
+  # Stage 2 (Young Palm) -> Stage 3 Growing (Mature Palm)
+  stage-2-seconds: 600
+  # Stage 3 Growing -> Stage 3 Ripe (Recurring fruit ripening cycle!)
+  ripen-seconds: 420
+
+  # Require owner to hold Sneak (Shift) when breaking a palm tree to prevent
+  # accidental uprooting while harvesting.
+  require-sneak-to-break: true
+  # Return Bibit Sawit Tenera when the owner uproots their own palm tree.
+  return-seed-on-break: true
+
+  # Allowed soil blocks underneath a planted oil palm.
+  allowed-soil-blocks:
+    - GRASS_BLOCK
+    - DIRT
+    - COARSE_DIRT
+    - PODZOL
+    - ROOTED_DIRT
+    - MUD
+    - MUDDY_MANGROVE_ROOTS
+    - FARMLAND
+
+  # Plantation slot limits per player (prevents economy inflation & lag).
+  slots:
+    base-limit: 8
+    max-bonus-slots: 42
+    upgrade-base-cost: 15000.0
+    upgrade-cost-per-slot: 7500.0
+
+  # Fertilizer (Pupuk NPK Sawit) settings
+  fertilizer:
+    # Seconds reduced from current growth/ripening timer per fertilizer used.
+    reduce-seconds: 180
+    max-uses-per-cycle: 3
+
+  # Harvest yield & Egrek sickle bonuses
+  harvest:
+    base-tbs-min: 1
+    base-tbs-max: 2
+    hand-super-chance: 0.03
+    egrek-tier1-bonus-tbs: 1
+    egrek-tier1-super-chance: 0.15
+    egrek-tier2-bonus-tbs: 2
+    egrek-tier2-super-chance: 0.35
+
+economy:
+  currency-symbol: "Rp"
+  sell-prices:
+    sawit-tbs: 350.0
+    sawit-tbs-super: 1200.0
+    sawit-cpo: 1450.0
+  cpo-mill:
+    # Number of regular TBS required to refine 1 Crude Palm Oil (CPO) bottle.
+    tbs-per-cpo: 3
+    processing-fee: 50.0
+  shop-prices:
+    sawit-seed: 25000.0
+    pupuk-npk: 1200.0
+    egrek-sawit: 18000.0
+    egrek-master: 65000.0
+    sawit-crate: 2500.0

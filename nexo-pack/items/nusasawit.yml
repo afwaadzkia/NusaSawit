@@ -1,0 +1,246 @@
+# ============================================================================
+# NusaSawit - Custom Nexo Items & 3D Custom Blocks Configuration
+# Copy the contents of `nexo-pack/` into `plugins/Nexo/` and run:
+#   /nexo reload all
+# ============================================================================
+
+sawit_seed:
+  itemname: "<gradient:#65d649:#2ea329><bold>Bibit Sawit Tenera</bold></gradient>"
+  material: PAPER
+  lore:
+    - "<dark_gray>Bibit Perkebunan Unggul"
+    - ""
+    - "<gray>Tanam di atas <green>Tanah / Rumput</green> untuk"
+    - "<gray>menumbuhkan pohon kelapa sawit produktif."
+    - ""
+    - "<yellow>Syarat Tanam: <white>Lisensi 20.000 Kayu Oak"
+    - "<gold>Klik Kanan Tanah <dark_gray>- <green>Menanam Bibit"
+  Pack:
+    parent_model: "item/generated"
+    texture: "nusasawit:item/sawit_seed"
+
+sawit_stage_1:
+  itemname: "<green>Tunas Kelapa Sawit (Tahap 1)"
+  material: PAPER
+  Pack:
+    model: "nusasawit:block/sawit_stage_1"
+  Mechanics:
+    furniture:
+      rotatable: false
+      restricted_rotation: VERY_STRICT
+      limited_placing:
+        roof: false
+        floor: true
+        wall: false
+      hitbox:
+        barriers:
+          - 0,0,0
+      properties:
+        display_transform: NONE
+        scale: 1.1,1.1,1.1
+        translation: 0,0.05,0
+        view_range: 2.0
+      drop:
+        silktouch: false
+        loots: []
+      block_sounds:
+        place_sound: block.grass.place
+        break_sound: block.grass.break
+        hit_sound: block.grass.hit
+
+sawit_stage_2:
+  itemname: "<green>Pohon Sawit Muda (Tahap 2)"
+  material: PAPER
+  Pack:
+    model: "nusasawit:block/sawit_stage_2"
+  Mechanics:
+    furniture:
+      rotatable: false
+      restricted_rotation: VERY_STRICT
+      limited_placing:
+        roof: false
+        floor: true
+        wall: false
+      hitbox:
+        barriers:
+          - 0,0..1,0
+      properties:
+        display_transform: NONE
+        scale: 2.0,2.0,2.0
+        translation: 0,0.5,0
+        view_range: 2.0
+      drop:
+        silktouch: false
+        loots: []
+      block_sounds:
+        place_sound: block.wood.place
+        break_sound: block.wood.break
+        hit_sound: block.wood.hit
+
+sawit_stage_3_growing:
+  itemname: "<dark_green>Pohon Sawit Dewasa (Berbunga)"
+  material: PAPER
+  Pack:
+    model: "nusasawit:block/sawit_stage_3_growing"
+  Mechanics:
+    furniture:
+      rotatable: false
+      restricted_rotation: VERY_STRICT
+      limited_placing:
+        roof: false
+        floor: true
+        wall: false
+      hitbox:
+        barriers:
+          - 0,0..3,0
+      properties:
+        display_transform: NONE
+        scale: 3.2,3.2,3.2
+        translation: 0,1.1,0
+        view_range: 2.5
+      drop:
+        silktouch: false
+        loots: []
+      block_sounds:
+        place_sound: block.wood.place
+        break_sound: block.wood.break
+        hit_sound: block.wood.hit
+
+sawit_stage_3_ripe:
+  itemname: "<gold><bold>Pohon Sawit Siap Panen</bold></gold>"
+  material: PAPER
+  Pack:
+    model: "nusasawit:block/sawit_stage_3_ripe"
+  Mechanics:
+    furniture:
+      rotatable: false
+      restricted_rotation: VERY_STRICT
+      limited_placing:
+        roof: false
+        floor: true
+        wall: false
+      hitbox:
+        barriers:
+          - 0,0..3,0
+      properties:
+        display_transform: NONE
+        scale: 3.2,3.2,3.2
+        translation: 0,1.1,0
+        view_range: 2.5
+      drop:
+        silktouch: false
+        loots: []
+      block_sounds:
+        place_sound: block.wood.place
+        break_sound: block.wood.break
+        hit_sound: block.wood.hit
+
+sawit_tbs:
+  itemname: "<gradient:#ff6a1a:#ffb326><bold>Tandan Buah Segar (TBS)</bold></gradient>"
+  material: PAPER
+  lore:
+    - "<dark_gray>Hasil Panen Kebun Sawit"
+    - ""
+    - "<gray>Buah kelapa sawit matang segar yang"
+    - "<gray>siap dijual atau diolah menjadi CPO."
+    - ""
+    - "<yellow>Jual di <gold>/sawit</gold>"
+  Pack:
+    parent_model: "item/generated"
+    texture: "nusasawit:item/sawit_tbs"
+
+sawit_tbs_super:
+  itemname: "<gradient:#ffd700:#fff280><bold>TBS Tenera Super</bold></gradient>"
+  material: PAPER
+  lore:
+    - "<dark_gray>Hasil Panen Kualitas Ekspor"
+    - ""
+    - "<gray>Tandan buah sawit kualitas tertinggi"
+    - "<gray>dengan rendemen minyak berlipat ganda!"
+    - ""
+    - "<yellow>Jual mahal di <gold>/sawit</gold>"
+  Pack:
+    parent_model: "item/generated"
+    texture: "nusasawit:item/sawit_tbs_super"
+
+sawit_cpo:
+  itemname: "<gradient:#f59e0b:#fde047><bold>Minyak Sawit Mentah (CPO)</bold></gradient>"
+  material: PAPER
+  lore:
+    - "<dark_gray>Produk Olahan Kilang Sawit"
+    - ""
+    - "<gray>Crude Palm Oil murni bernilai ekonomi"
+    - "<gray>tinggi hasil ekstraksi tandan segar."
+    - ""
+    - "<yellow>Jual dengan harga premium di <gold>/sawit</gold>"
+  Pack:
+    parent_model: "item/generated"
+    texture: "nusasawit:item/sawit_cpo"
+
+pupuk_npk:
+  itemname: "<gradient:#84cc16:#22c55e><bold>Pupuk NPK Sawit</bold></gradient>"
+  material: PAPER
+  lore:
+    - "<dark_gray>Nutrisi Percepatan Kebun"
+    - ""
+    - "<gray>Mempercepat pertumbuhan pohon sawit"
+    - "<gray>dan pematangan tandan buah secara instan."
+    - ""
+    - "<gold>Klik Kanan Pohon Sawit <dark_gray>- <green>Beri Pupuk"
+  Pack:
+    parent_model: "item/generated"
+    texture: "nusasawit:item/pupuk_npk"
+
+egrek_sawit:
+  itemname: "<gradient:#cbd5e1:#f8fafc><bold>Egrek Panen Sawit</bold></gradient>"
+  material: PAPER
+  Components:
+    max_stack_size: 1
+  lore:
+    - "<dark_gray>Alat Panen Perkebunan (Tier I)"
+    - ""
+    - "<gray>Sabit galah tajam khusus memanen"
+    - "<gray>tandan sawit matang dengan efisien."
+    - ""
+    - "<green>+1 Bonus TBS <gray>& <gold>15% Peluang TBS Super"
+    - "<gold>Klik Kanan Sawit Matang <dark_gray>- <green>Panen"
+  Pack:
+    parent_model: "item/handheld"
+    texture: "nusasawit:item/egrek_sawit"
+
+egrek_master:
+  itemname: "<gradient:#f59e0b:#fef08a><bold>Egrek Baja Nusantara</bold></gradient>"
+  material: PAPER
+  Components:
+    max_stack_size: 1
+  lore:
+    - "<dark_gray>Alat Panen Master (Tier II)"
+    - ""
+    - "<gray>Egrek baja tempa berlapis emas untuk"
+    - "<gray>hasil panen melimpah tanpa merusak pelepah."
+    - ""
+    - "<green>+2 Bonus TBS <gray>& <gold>35% Peluang TBS Super"
+    - "<gold>Klik Kanan Sawit Matang <dark_gray>- <green>Panen"
+  Pack:
+    parent_model: "item/handheld"
+    texture: "nusasawit:item/egrek_master"
+
+sawit_crate:
+  itemname: "<gold><bold>Peti Gudang TBS</bold></gold>"
+  material: PAPER
+  lore:
+    - "<dark_gray>Blok Dekorasi Kebun Sawit"
+    - ""
+    - "<gray>Peti kayu berisi tumpukan tandan buah"
+    - "<gray>sawit segar untuk menghias gudangmu."
+  Pack:
+    model: "nusasawit:block/sawit_crate"
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      custom_variation: 91
+      model: "nusasawit:block/sawit_crate"
+      hardness: 2.0
+      loots:
+        - nexo_item: sawit_crate
+          probability: 1.0

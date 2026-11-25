@@ -1,0 +1,22 @@
+name: NusaSawit
+version: "${version}"
+main: id.nusaspigot.sawit.NusaSawitPlugin
+api-version: "1.21"
+authors:
+  - NusaSpigot
+description: Custom Indonesian Oil Palm Plantation plugin with 20k wood license quest, Vault economy, and Nexo 3D custom blocks.
+softdepend:
+  - Nexo
+  - Vault
+commands:
+  sawit:
+    description: Menu utama perkebunan kelapa sawit NusaSawit
+    aliases: [nusasawit, kebunsawit]
+    usage: /sawit [sell|progress|claim|admin]
+permissions:
+  nusasawit.use:
+    description: Mengakses fitur dasar perkebunan NusaSawit
+    default: true
+  nusasawit.admin:
+    description: Akses penuh perintah admin dan bypass proteksi kebun sawit
+    default: op

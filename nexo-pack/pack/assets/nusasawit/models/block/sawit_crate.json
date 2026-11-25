@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "nusasawit:block/sawit_crate_top",
+    "bottom": "nusasawit:block/sawit_crate_side",
+    "side": "nusasawit:block/sawit_crate_side"
+  }
+}
