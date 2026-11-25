@@ -1,8 +1,8 @@
 package id.nusaspigot.sawit.service;
 
 import id.nusaspigot.sawit.config.SawitConfig;
-import id.nusaspigot.sawit.hook.NexoBridge;
-import id.nusaspigot.sawit.hook.NexoHook;
+import id.nusaspigot.sawit.hook.CustomPackHook;
+import id.nusaspigot.sawit.hook.PalmInteractionCallback;
 import id.nusaspigot.sawit.item.SawitItemFactory;
 import id.nusaspigot.sawit.item.SawitItemType;
 import id.nusaspigot.sawit.model.BlockPosKey;
@@ -61,7 +61,7 @@ import java.util.function.Supplier;
  * Main-thread manager for planting, 3-stage growth, fertilizing, harvesting,
  * owner protection, and Nexo custom block synchronization.
  */
-public final class PalmFarmManager implements Listener, NexoBridge.PalmInteractionCallback {
+public final class PalmFarmManager implements Listener, PalmInteractionCallback {
 
     private static final MiniMessage MM = MiniMessage.miniMessage();
 
@@ -69,7 +69,7 @@ public final class PalmFarmManager implements Listener, NexoBridge.PalmInteracti
     private final Supplier<SawitConfig> configSupplier;
     private final Function<UUID, PlayerSawitData> playerDataByUuid;
     private final SawitItemFactory itemFactory;
-    private final NexoHook nexoHook;
+    private final CustomPackHook nexoHook;
     private final NumberFormat intFormat;
 
     private record BreakConfirmState(BlockPosKey pos, long expiresEpochMs) {}
@@ -87,13 +87,13 @@ public final class PalmFarmManager implements Listener, NexoBridge.PalmInteracti
         Supplier<SawitConfig> configSupplier,
         Function<UUID, PlayerSawitData> playerDataByUuid,
         SawitItemFactory itemFactory,
-        NexoHook nexoHook
+        CustomPackHook packHook
     ) {
         this.plugin = plugin;
         this.configSupplier = configSupplier;
         this.playerDataByUuid = playerDataByUuid;
         this.itemFactory = itemFactory;
-        this.nexoHook = nexoHook;
+        this.nexoHook = packHook;
         this.intFormat = NumberFormat.getIntegerInstance(Locale.forLanguageTag("id-ID"));
     }
 

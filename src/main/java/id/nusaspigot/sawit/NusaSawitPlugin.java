@@ -4,8 +4,8 @@ import id.nusaspigot.sawit.command.SawitCommand;
 import id.nusaspigot.sawit.config.SawitConfig;
 import id.nusaspigot.sawit.gui.SawitAdminGuiManager;
 import id.nusaspigot.sawit.gui.SawitGuiManager;
-import id.nusaspigot.sawit.hook.NexoBridge;
-import id.nusaspigot.sawit.hook.NexoHook;
+import id.nusaspigot.sawit.hook.CustomPackHook;
+import id.nusaspigot.sawit.hook.CustomPackProvider;
 import id.nusaspigot.sawit.hook.VaultEconomyHook;
 import id.nusaspigot.sawit.item.SawitItemFactory;
 import id.nusaspigot.sawit.model.BlockPosKey;
@@ -44,7 +44,7 @@ public final class NusaSawitPlugin extends JavaPlugin implements Listener {
     private SawitConfig sawitConfig;
     private SawitDatabase database;
     private VaultEconomyHook economyHook;
-    private NexoHook nexoHook;
+    private CustomPackHook packHook;
     private SawitItemFactory itemFactory;
     private PalmFarmManager farmManager;
     private SawitEconomyService economyService;
@@ -74,14 +74,14 @@ public final class NusaSawitPlugin extends JavaPlugin implements Listener {
             getLogger().warning("Vault Economy provider not detected yet; will retry lazily on transactions.");
         }
 
-        this.nexoHook = new NexoHook(this);
-        this.itemFactory = new SawitItemFactory(this, nexoHook);
+        this.packHook = new CustomPackHook(this);
+        this.itemFactory = new SawitItemFactory(this, packHook);
         this.farmManager = new PalmFarmManager(
             this,
             this::sawitConfig,
             this::getPlayerData,
             itemFactory,
-            nexoHook
+            packHook
         );
 
         try {
@@ -95,16 +95,19 @@ public final class NusaSawitPlugin extends JavaPlugin implements Listener {
             getLogger().log(Level.SEVERE, "Failed to load saved NusaSawit data", ex);
         }
 
-        this.nexoHook.initialize(
-            sawitConfig.autoSyncNexoPack(),
-            sawitConfig.overwriteExistingNexoPack(),
+        this.packHook.initialize(
+            sawitConfig,
+            farmManager,
             farmManager::refreshAllLoadedPalmVisuals
         );
-        if (nexoHook.isNexoEnabled()) {
-            NexoBridge.registerPalmListeners(this, farmManager);
-            getLogger().info("Hooked into Nexo custom blocks & items API.");
+        if (packHook.activeProvider() == CustomPackProvider.NEXO) {
+            getLogger().info("Hooked into Nexo custom 3D blocks & items API.");
+        } else if (packHook.activeProvider() == CustomPackProvider.ITEMSADDER) {
+            getLogger().info("Hooked into ItemsAdder custom 3D furniture & items API.");
+        } else if (packHook.activeProvider() == CustomPackProvider.CRAFTENGINE) {
+            getLogger().info("Hooked into CraftEngine custom 3D furniture & items API.");
         } else {
-            getLogger().info("Nexo not installed yet; running with vanilla visual fallback and exported nexo-pack.");
+            getLogger().info("Running with vanilla visual fallback (exported nexo-pack, itemsadder-pack, and craftengine-pack).");
         }
 
         this.economyService = new SawitEconomyService(
@@ -145,7 +148,7 @@ public final class NusaSawitPlugin extends JavaPlugin implements Listener {
 
         PluginCommand cmd = getCommand("sawit");
         if (cmd != null) {
-            SawitCommand executor = new SawitCommand(this, guiManager, adminGuiManager, farmManager, economyService, itemFactory, nexoHook);
+            SawitCommand executor = new SawitCommand(this, guiManager, adminGuiManager, farmManager, economyService, itemFactory, packHook);
             cmd.setExecutor(executor);
             cmd.setTabCompleter(executor);
         }
@@ -153,9 +156,9 @@ public final class NusaSawitPlugin extends JavaPlugin implements Listener {
         // Main-thread growth stage ticker (every 20 ticks = 1 second)
         Bukkit.getScheduler().runTaskTimer(this, farmManager::tickGrowth, 20L, 20L);
 
-        // Sweep any orphaned/stuck palm ItemDisplay entities once worlds & Nexo finish initializing
+        // Sweep any orphaned/stuck palm entities once worlds & pack provider finish initializing
         Bukkit.getScheduler().runTaskLater(this, () -> {
-            int cleaned = nexoHook.cleanupAllLoadedOrphanPalms(farmManager::hasPalmAt);
+            int cleaned = packHook.cleanupAllLoadedOrphanPalms(farmManager::hasPalmAt);
             if (cleaned > 0) {
                 getLogger().info("Cleaned up " + cleaned + " orphaned oil palm display entities.");
             }
@@ -237,7 +240,7 @@ public final class NusaSawitPlugin extends JavaPlugin implements Listener {
             for (int dx = -2; dx <= 2; dx++) {
                 for (int dz = -2; dz <= 2; dz++) {
                     if (world.isChunkLoaded(baseCx + dx, baseCz + dz)) {
-                        nexoHook.cleanupOrphanPalmsInChunk(world.getChunkAt(baseCx + dx, baseCz + dz), farmManager::hasPalmAt);
+                        packHook.cleanupOrphanPalmsInChunk(world.getChunkAt(baseCx + dx, baseCz + dz), farmManager::hasPalmAt);
                     }
                 }
             }

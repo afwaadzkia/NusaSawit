@@ -152,6 +152,9 @@ public enum SawitItemType {
             return null;
         }
         String normalized = id.trim().toLowerCase(Locale.ROOT);
+        if (normalized.startsWith("nusasawit:")) {
+            normalized = normalized.substring("nusasawit:".length());
+        }
         for (SawitItemType type : values()) {
             if (type.nexoId.equals(normalized) || type.name().toLowerCase(Locale.ROOT).equals(normalized)) {
                 return type;

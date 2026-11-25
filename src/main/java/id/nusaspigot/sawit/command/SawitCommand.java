@@ -4,7 +4,7 @@ import id.nusaspigot.sawit.NusaSawitPlugin;
 import id.nusaspigot.sawit.config.SawitConfig;
 import id.nusaspigot.sawit.gui.SawitAdminGuiManager;
 import id.nusaspigot.sawit.gui.SawitGuiManager;
-import id.nusaspigot.sawit.hook.NexoHook;
+import id.nusaspigot.sawit.hook.CustomPackHook;
 import id.nusaspigot.sawit.item.SawitItemFactory;
 import id.nusaspigot.sawit.item.SawitItemType;
 import id.nusaspigot.sawit.model.PlayerSawitData;
@@ -40,7 +40,7 @@ public final class SawitCommand implements CommandExecutor, TabCompleter {
     private final PalmFarmManager farmManager;
     private final SawitEconomyService economyService;
     private final SawitItemFactory itemFactory;
-    private final NexoHook nexoHook;
+    private final CustomPackHook packHook;
     private final NumberFormat intFormat;
 
     public SawitCommand(
@@ -50,7 +50,7 @@ public final class SawitCommand implements CommandExecutor, TabCompleter {
         PalmFarmManager farmManager,
         SawitEconomyService economyService,
         SawitItemFactory itemFactory,
-        NexoHook nexoHook
+        CustomPackHook packHook
     ) {
         this.plugin = plugin;
         this.guiManager = guiManager;
@@ -58,7 +58,7 @@ public final class SawitCommand implements CommandExecutor, TabCompleter {
         this.farmManager = farmManager;
         this.economyService = economyService;
         this.itemFactory = itemFactory;
-        this.nexoHook = nexoHook;
+        this.packHook = packHook;
         this.intFormat = NumberFormat.getIntegerInstance(Locale.forLanguageTag("id-ID"));
     }
 
@@ -149,7 +149,7 @@ public final class SawitCommand implements CommandExecutor, TabCompleter {
                 return;
             }
             sender.sendMessage(MM.deserialize(
-                "<gold>[NusaSawit Admin]</gold> <gray>Subcommand: <yellow>gui, give, setwood, unlock, addslots, cleanup, syncnexo, reload</yellow></gray>"
+                "<gold>[NusaSawit Admin]</gold> <gray>Subcommand: <yellow>gui, give, setwood, unlock, addslots, cleanup, syncpack, syncnexo, syncia, syncce, reload</yellow></gray>"
             ));
             return;
         }
@@ -167,18 +167,51 @@ public final class SawitCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(MM.deserialize("<green>[NusaSawit] Konfigurasi berhasil dimuat ulang!</green>"));
             }
             case "cleanup", "clean", "fixstuck" -> {
-                int cleaned = nexoHook.cleanupAllLoadedOrphanPalms(farmManager::hasPalmAt);
+                int cleaned = packHook.cleanupAllLoadedOrphanPalms(farmManager::hasPalmAt);
                 sender.sendMessage(MM.deserialize(
                     "<green>[NusaSawit]</green> <gray>Berhasil membersihkan <gold>" + cleaned
                         + "</gold> entitas model pohon sawit yang nyangkut (orphan) di chunk aktif.</gray>"
                 ));
             }
             case "syncnexo" -> {
-                int copied = nexoHook.syncToNexoFolder(true);
+                int copied = packHook.syncToNexoFolder(true);
                 farmManager.refreshAllLoadedPalmVisuals();
                 sender.sendMessage(MM.deserialize(
                     "<green>[NusaSawit]</green> <gray>Berhasil menyalin ulang <gold>" + copied
                         + "</gold> file tekstur & model 3D ke <yellow>plugins/Nexo/</yellow>! Jalankan <gold>/nexo reload all</gold>.</gray>"
+                ));
+            }
+            case "syncia", "syncitemsadder" -> {
+                int copied = packHook.syncToItemsAdderFolder(true);
+                farmManager.refreshAllLoadedPalmVisuals();
+                sender.sendMessage(MM.deserialize(
+                    "<green>[NusaSawit]</green> <gray>Berhasil menyalin ulang <gold>" + copied
+                        + "</gold> file tekstur & model 3D ke <yellow>plugins/ItemsAdder/contents/nusasawit/</yellow>! Jalankan <gold>/iazip</gold>.</gray>"
+                ));
+            }
+            case "syncce", "synccraftengine" -> {
+                int copied = packHook.syncToCraftEngineFolder(true);
+                farmManager.refreshAllLoadedPalmVisuals();
+                sender.sendMessage(MM.deserialize(
+                    "<green>[NusaSawit]</green> <gray>Berhasil menyalin ulang <gold>" + copied
+                        + "</gold> file tekstur & model 3D ke <yellow>plugins/CraftEngine/resources/nusasawit/</yellow>! Jalankan <gold>/ce reload all</gold>.</gray>"
+                ));
+            }
+            case "syncpack" -> {
+                int nexoCopied = packHook.isNexoActive() ? packHook.syncToNexoFolder(true) : 0;
+                int iaCopied = packHook.isItemsAdderActive() ? packHook.syncToItemsAdderFolder(true) : 0;
+                int ceCopied = packHook.isCraftEngineActive() ? packHook.syncToCraftEngineFolder(true) : 0;
+                if (nexoCopied == 0 && iaCopied == 0 && ceCopied == 0) {
+                    nexoCopied = packHook.syncToNexoFolder(true);
+                    iaCopied = packHook.syncToItemsAdderFolder(true);
+                    ceCopied = packHook.syncToCraftEngineFolder(true);
+                }
+                farmManager.refreshAllLoadedPalmVisuals();
+                sender.sendMessage(MM.deserialize(
+                    "<green>[NusaSawit]</green> <gray>Sinkronisasi pack selesai (Nexo: <gold>" + nexoCopied
+                        + "</gold>, ItemsAdder: <gold>" + iaCopied
+                        + "</gold>, CraftEngine: <gold>" + ceCopied
+                        + "</gold>). Jalankan <gold>/nexo reload all</gold>, <gold>/iazip</gold>, atau <gold>/ce reload all</gold>.</gray>"
                 ));
             }
             case "give" -> {
@@ -291,7 +324,7 @@ public final class SawitCommand implements CommandExecutor, TabCompleter {
             return filterPrefix(base, args[0]);
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("admin") && sender.hasPermission("nusasawit.admin")) {
-            return filterPrefix(List.of("gui", "give", "setwood", "unlock", "addslots", "cleanup", "syncnexo", "reload"), args[1]);
+            return filterPrefix(List.of("gui", "give", "setwood", "unlock", "addslots", "cleanup", "syncpack", "syncnexo", "syncia", "syncce", "reload"), args[1]);
         }
         if (args.length == 3 && args[0].equalsIgnoreCase("admin") && sender.hasPermission("nusasawit.admin")) {
             String act = args[1].toLowerCase(Locale.ROOT);

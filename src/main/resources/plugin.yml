@@ -4,9 +4,11 @@ main: id.nusaspigot.sawit.NusaSawitPlugin
 api-version: "1.21"
 authors:
   - NusaSpigot
-description: Custom Indonesian Oil Palm Plantation plugin with 20k wood license quest, Vault economy, and Nexo 3D custom blocks.
+description: Oil Palm Plantation plugin with natural wood license quest, Vault economy, and Nexo / ItemsAdder / CraftEngine 3D custom models.
 softdepend:
   - Nexo
+  - ItemsAdder
+  - CraftEngine
   - Vault
 commands:
   sawit:

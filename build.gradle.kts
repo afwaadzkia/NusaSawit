@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "id.nusaspigot.sawit"
-version = "1.0.0"
+version = "1.1.0"
 
 java {
     toolchain {
@@ -15,12 +15,16 @@ repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.nexomc.com/releases")
+    maven("https://repo.momirealms.net/releases/")
     maven("https://jitpack.io")
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     compileOnly("com.nexomc:nexo:1.30.2")
+    compileOnly("com.github.LoneDev6:API-ItemsAdder:3.6.3-beta-14")
+    compileOnly("net.momirealms:craft-engine-core:0.0.67.11")
+    compileOnly("net.momirealms:craft-engine-bukkit:0.0.67.11")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1") {
         exclude(group = "org.bukkit", module = "bukkit")
     }
@@ -46,6 +50,12 @@ tasks.processResources {
     }
     from("nexo-pack") {
         into("nexo-pack")
+    }
+    from("itemsadder-pack") {
+        into("itemsadder-pack")
+    }
+    from("craftengine-pack") {
+        into("craftengine-pack")
     }
 }
 

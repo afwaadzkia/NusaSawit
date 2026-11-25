@@ -1,6 +1,6 @@
 package id.nusaspigot.sawit.item;
 
-import id.nusaspigot.sawit.hook.NexoHook;
+import id.nusaspigot.sawit.hook.CustomPackHook;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -17,23 +17,23 @@ import java.util.Map;
 
 /**
  * Builds and identifies NusaSawit custom items.
- * Prefers Nexo custom items when Nexo is active, while stamping a NusaSawit
- * PersistentDataContainer tag so item checks never break across reloads.
+ * Prefers Nexo or ItemsAdder custom items when active, while stamping a NusaSawit
+ * PersistentDataContainer tag so item checks never break across reloads or providers.
  */
 public final class SawitItemFactory {
 
     private static final MiniMessage MM = MiniMessage.miniMessage();
     private final NamespacedKey itemTypeKey;
-    private final NexoHook nexoHook;
+    private final CustomPackHook packHook;
 
-    public SawitItemFactory(Plugin plugin, NexoHook nexoHook) {
+    public SawitItemFactory(Plugin plugin, CustomPackHook packHook) {
         this.itemTypeKey = new NamespacedKey(plugin, "item_type");
-        this.nexoHook = nexoHook;
+        this.packHook = packHook;
     }
 
     public ItemStack create(SawitItemType type, int amount) {
         int safeAmount = Math.max(1, amount);
-        ItemStack stack = nexoHook.buildNexoItem(type.nexoId());
+        ItemStack stack = packHook.buildCustomItem(type.nexoId());
         if (stack == null) {
             stack = new ItemStack(type.fallbackMaterial(), Math.min(64, safeAmount));
             ItemMeta fallbackMeta = stack.getItemMeta();
@@ -77,9 +77,9 @@ public final class SawitItemFactory {
                 }
             }
         }
-        String nexoId = nexoHook.idFromItem(stack);
-        if (nexoId != null) {
-            return SawitItemType.fromId(nexoId);
+        String customId = packHook.idFromItem(stack);
+        if (customId != null) {
+            return SawitItemType.fromId(customId);
         }
         return null;
     }

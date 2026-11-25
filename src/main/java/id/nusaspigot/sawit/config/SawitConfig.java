@@ -1,5 +1,6 @@
 package id.nusaspigot.sawit.config;
 
+import id.nusaspigot.sawit.hook.CustomPackProvider;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -13,8 +14,13 @@ import java.util.Set;
  */
 public final class SawitConfig {
 
+    private final CustomPackProvider packProvider;
     private final boolean autoSyncNexoPack;
     private final boolean overwriteExistingNexoPack;
+    private final boolean autoSyncItemsAdderPack;
+    private final boolean overwriteExistingItemsAdderPack;
+    private final boolean autoSyncCraftEnginePack;
+    private final boolean overwriteExistingCraftEnginePack;
 
     private final long requiredBlocks;
     private final long milestoneInterval;
@@ -58,8 +64,13 @@ public final class SawitConfig {
     private final double shopPriceCrate;
 
     public SawitConfig(FileConfiguration cfg) {
+        this.packProvider = CustomPackProvider.fromConfig(cfg.getString("pack-provider", "AUTO"));
         this.autoSyncNexoPack = cfg.getBoolean("nexo.auto-sync-pack", true);
         this.overwriteExistingNexoPack = cfg.getBoolean("nexo.overwrite-existing", false);
+        this.autoSyncItemsAdderPack = cfg.getBoolean("itemsadder.auto-sync-pack", true);
+        this.overwriteExistingItemsAdderPack = cfg.getBoolean("itemsadder.overwrite-existing", false);
+        this.autoSyncCraftEnginePack = cfg.getBoolean("craftengine.auto-sync-pack", true);
+        this.overwriteExistingCraftEnginePack = cfg.getBoolean("craftengine.overwrite-existing", false);
 
         this.requiredBlocks = Math.max(1L, cfg.getLong("quest.required-blocks", 20_000L));
         this.milestoneInterval = Math.max(0L, cfg.getLong("quest.milestone-interval", 10_000L));
@@ -127,8 +138,13 @@ public final class SawitConfig {
         return Set.copyOf(set);
     }
 
+    public CustomPackProvider packProvider() { return packProvider; }
     public boolean autoSyncNexoPack() { return autoSyncNexoPack; }
     public boolean overwriteExistingNexoPack() { return overwriteExistingNexoPack; }
+    public boolean autoSyncItemsAdderPack() { return autoSyncItemsAdderPack; }
+    public boolean overwriteExistingItemsAdderPack() { return overwriteExistingItemsAdderPack; }
+    public boolean autoSyncCraftEnginePack() { return autoSyncCraftEnginePack; }
+    public boolean overwriteExistingCraftEnginePack() { return overwriteExistingCraftEnginePack; }
     public long requiredBlocks() { return requiredBlocks; }
     public long milestoneInterval() { return milestoneInterval; }
     public Set<Material> validLogMaterials() { return validLogMaterials; }

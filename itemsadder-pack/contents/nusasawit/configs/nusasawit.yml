@@ -1,0 +1,276 @@
+# ============================================================================
+# NusaSawit - Custom ItemsAdder Items & 3D Furniture Configuration
+# Compatible with ItemsAdder 3.6+ and 4.0+ (Minecraft 1.21.x)
+# Auto-synced to `plugins/ItemsAdder/contents/nusasawit/` — run:
+#   /iazip
+# ============================================================================
+
+info:
+  namespace: nusasawit
+
+items:
+  sawit_seed:
+    display_name: "&#65d649&lBibit Sawit Tenera"
+    lore:
+      - "&8Bibit Perkebunan Unggul"
+      - ""
+      - "&7Tanam di atas &aTanah / Rumput &7untuk"
+      - "&7menumbuhkan pohon kelapa sawit produktif."
+      - ""
+      - "&eSyarat Tanam: &fLisensi 20.000 Kayu Oak"
+      - "&6Klik Kanan Tanah &8- &aMenanam Bibit"
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - item/sawit_seed.png
+
+  sawit_stage_1:
+    display_name: "&aTunas Kelapa Sawit (Tahap 1)"
+    resource:
+      material: PAPER
+      generate: false
+      model_path: block/sawit_stage_1
+    behaviours:
+      furniture:
+        entity: item_display
+        solid: true
+        fixed_rotation: true
+        drop_when_mined: false
+        placeable_on:
+          floor: true
+          ceiling: false
+          walls: false
+        hitbox:
+          length: 1
+          width: 1
+          height: 1
+        display_transformation:
+          transform: NONE
+          scale:
+            x: 1.1
+            y: 1.1
+            z: 1.1
+          translation:
+            x: 0.0
+            y: 0.05
+            z: 0.0
+
+  sawit_stage_2:
+    display_name: "&aPohon Sawit Muda (Tahap 2)"
+    resource:
+      material: PAPER
+      generate: false
+      model_path: block/sawit_stage_2
+    behaviours:
+      furniture:
+        entity: item_display
+        solid: true
+        fixed_rotation: true
+        drop_when_mined: false
+        placeable_on:
+          floor: true
+          ceiling: false
+          walls: false
+        hitbox:
+          length: 1
+          width: 1
+          height: 2
+        display_transformation:
+          transform: NONE
+          scale:
+            x: 2.0
+            y: 2.0
+            z: 2.0
+          translation:
+            x: 0.0
+            y: 0.5
+            z: 0.0
+
+  sawit_stage_3_growing:
+    display_name: "&2Pohon Sawit Dewasa (Berbunga)"
+    resource:
+      material: PAPER
+      generate: false
+      model_path: block/sawit_stage_3_growing
+    behaviours:
+      furniture:
+        entity: item_display
+        solid: true
+        fixed_rotation: true
+        drop_when_mined: false
+        placeable_on:
+          floor: true
+          ceiling: false
+          walls: false
+        hitbox:
+          length: 1
+          width: 1
+          height: 4
+        display_transformation:
+          transform: NONE
+          scale:
+            x: 3.2
+            y: 3.2
+            z: 3.2
+          translation:
+            x: 0.0
+            y: 1.1
+            z: 0.0
+
+  sawit_stage_3_ripe:
+    display_name: "&6&lPohon Sawit Siap Panen"
+    resource:
+      material: PAPER
+      generate: false
+      model_path: block/sawit_stage_3_ripe
+    behaviours:
+      furniture:
+        entity: item_display
+        solid: true
+        fixed_rotation: true
+        drop_when_mined: false
+        placeable_on:
+          floor: true
+          ceiling: false
+          walls: false
+        hitbox:
+          length: 1
+          width: 1
+          height: 4
+        display_transformation:
+          transform: NONE
+          scale:
+            x: 3.2
+            y: 3.2
+            z: 3.2
+          translation:
+            x: 0.0
+            y: 1.1
+            z: 0.0
+
+  sawit_tbs:
+    display_name: "&#ff6a1a&lTandan Buah Segar (TBS)"
+    lore:
+      - "&8Hasil Panen Kebun Sawit"
+      - ""
+      - "&7Buah kelapa sawit matang segar yang"
+      - "&7siap dijual atau diolah menjadi CPO."
+      - ""
+      - "&eJual di &6/sawit"
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - item/sawit_tbs.png
+
+  sawit_tbs_super:
+    display_name: "&#ffd700&lTBS Tenera Super"
+    lore:
+      - "&8Hasil Panen Kualitas Ekspor"
+      - ""
+      - "&7Tandan buah sawit kualitas tertinggi"
+      - "&7dengan rendemen minyak berlipat ganda!"
+      - ""
+      - "&eJual mahal di &6/sawit"
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - item/sawit_tbs_super.png
+
+  sawit_cpo:
+    display_name: "&#f59e0b&lMinyak Sawit Mentah (CPO)"
+    lore:
+      - "&8Produk Olahan Kilang Sawit"
+      - ""
+      - "&7Crude Palm Oil murni bernilai ekonomi"
+      - "&7tinggi hasil ekstraksi tandan segar."
+      - ""
+      - "&eJual dengan harga premium di &6/sawit"
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - item/sawit_cpo.png
+
+  pupuk_npk:
+    display_name: "&#84cc16&lPupuk NPK Sawit"
+    lore:
+      - "&8Nutrisi Percepatan Kebun"
+      - ""
+      - "&7Mempercepat pertumbuhan pohon sawit"
+      - "&7dan pematangan tandan buah secara instan."
+      - ""
+      - "&6Klik Kanan Pohon Sawit &8- &aBeri Pupuk"
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - item/pupuk_npk.png
+
+  egrek_sawit:
+    display_name: "&#cbd5e1&lEgrek Panen Sawit"
+    lore:
+      - "&8Alat Panen Perkebunan (Tier I)"
+      - ""
+      - "&7Sabit galah tajam khusus memanen"
+      - "&7tandan sawit matang dengan efisien."
+      - ""
+      - "&a+1 Bonus TBS &7& &615% Peluang TBS Super"
+      - "&6Klik Kanan Sawit Matang &8- &aPanen"
+    resource:
+      material: IRON_HOE
+      generate: false
+      model_path: item/egrek_sawit
+
+  egrek_master:
+    display_name: "&#f59e0b&lEgrek Baja Nusantara"
+    lore:
+      - "&8Alat Panen Master (Tier II)"
+      - ""
+      - "&7Egrek baja tempa berlapis emas untuk"
+      - "&7hasil panen melimpah tanpa merusak pelepah."
+      - ""
+      - "&a+2 Bonus TBS &7& &635% Peluang TBS Super"
+      - "&6Klik Kanan Sawit Matang &8- &aPanen"
+    resource:
+      material: GOLDEN_HOE
+      generate: false
+      model_path: item/egrek_master
+
+  sawit_crate:
+    display_name: "&6&lPeti Gudang TBS"
+    lore:
+      - "&8Blok Dekorasi Kebun Sawit"
+      - ""
+      - "&7Peti kayu berisi tumpukan tandan buah"
+      - "&7sawit segar untuk menghias gudangmu."
+    resource:
+      material: PAPER
+      generate: false
+      model_path: block/sawit_crate
+    behaviours:
+      furniture:
+        entity: item_display
+        solid: true
+        fixed_rotation: false
+        drop_when_mined: true
+        placeable_on:
+          floor: true
+          ceiling: false
+          walls: false
+        hitbox:
+          length: 1
+          width: 1
+          height: 1
+        display_transformation:
+          transform: NONE
+          scale:
+            x: 1.0
+            y: 1.0
+            z: 1.0
+          translation:
+            x: 0.0
+            y: 0.0
+            z: 0.0

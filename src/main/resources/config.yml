@@ -1,11 +1,26 @@
 # ============================================================================
 # NusaSawit Configuration
-# Target: Paper / NusaSpigot 1.21.11 | Soft-Dependencies: Nexo, Vault
+# Target: Paper / NusaSpigot 1.21.11 | Soft-Dependencies: Nexo, ItemsAdder, CraftEngine, Vault
 # ============================================================================
+
+# Custom item & 3D model provider: AUTO, NEXO, ITEMSADDER, CRAFTENGINE, or VANILLA
+pack-provider: AUTO
 
 nexo:
   # Automatically copy custom textures, 3D JSON models, and items/nusasawit.yml
   # into plugins/Nexo/ when Nexo is installed on the server.
+  auto-sync-pack: true
+  overwrite-existing: false
+
+itemsadder:
+  # Automatically copy custom textures, 3D JSON models, and configs/nusasawit.yml
+  # into plugins/ItemsAdder/contents/nusasawit/ when ItemsAdder is installed.
+  auto-sync-pack: true
+  overwrite-existing: false
+
+craftengine:
+  # Automatically copy pack.yml, configuration/nusasawit.yml, and 3D models/textures
+  # into plugins/CraftEngine/resources/nusasawit/ when CraftEngine is installed.
   auto-sync-pack: true
   overwrite-existing: false
 

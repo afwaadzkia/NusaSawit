@@ -53,11 +53,6 @@ public final class NexoBridge {
 
     private NexoBridge() {}
 
-    public interface PalmInteractionCallback {
-        boolean onPalmRightClick(Player player, Block block, ItemStack itemInHand, EquipmentSlot hand);
-        PalmBreakOutcome onPalmBreak(Player player, Block block);
-    }
-
     public static void registerLoadListener(Plugin plugin, Runnable onNexoLoaded) {
         Bukkit.getPluginManager().registerEvents(new Listener() {
             @EventHandler

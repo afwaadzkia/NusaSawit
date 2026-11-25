@@ -1,5 +1,7 @@
 package id.nusaspigot.sawit;
 
+import id.nusaspigot.sawit.hook.CustomPackProvider;
+import id.nusaspigot.sawit.item.SawitItemType;
 import id.nusaspigot.sawit.model.BlockPosKey;
 import id.nusaspigot.sawit.model.PalmStage;
 import id.nusaspigot.sawit.model.PlantedPalm;
@@ -153,5 +155,47 @@ class SawitCoreTest {
             String json = Files.readString(mp);
             assertTrue(json.contains("nusasawit:block/"), "Model missing texture namespace: " + m);
         }
+
+        // Verify ItemsAdder pack layout & namespaced item resolution
+        Path iaRoot = Path.of("itemsadder-pack/contents/nusasawit");
+        assertTrue(Files.exists(iaRoot.resolve("configs/nusasawit.yml")), "Missing ItemsAdder config nusasawit.yml");
+        String iaYaml = Files.readString(iaRoot.resolve("configs/nusasawit.yml"));
+        assertTrue(iaYaml.contains("namespace: nusasawit"));
+        assertTrue(iaYaml.contains("entity: item_display"));
+
+        for (String rel : pngs) {
+            Path p = iaRoot.resolve("resourcepack/assets/nusasawit/textures/" + rel);
+            assertTrue(Files.exists(p), "Missing ItemsAdder texture: " + rel);
+        }
+        for (String m : models) {
+            Path mp = iaRoot.resolve("resourcepack/assets/nusasawit/models/block/" + m);
+            assertTrue(Files.exists(mp), "Missing ItemsAdder 3D model: " + m);
+        }
+
+        // Verify CraftEngine pack layout & configuration
+        Path ceRoot = Path.of("craftengine-pack/resources/nusasawit");
+        assertTrue(Files.exists(ceRoot.resolve("pack.yml")), "Missing CraftEngine pack.yml");
+        assertTrue(Files.exists(ceRoot.resolve("configuration/nusasawit.yml")), "Missing CraftEngine configuration/nusasawit.yml");
+        String ceYaml = Files.readString(ceRoot.resolve("configuration/nusasawit.yml"));
+        assertTrue(ceYaml.contains("nusasawit:sawit_stage_3_ripe"));
+        assertTrue(ceYaml.contains("furniture:"));
+
+        for (String rel : pngs) {
+            Path p = ceRoot.resolve("resourcepack/assets/nusasawit/textures/" + rel);
+            assertTrue(Files.exists(p), "Missing CraftEngine texture: " + rel);
+        }
+        for (String m : models) {
+            Path mp = ceRoot.resolve("resourcepack/assets/nusasawit/models/block/" + m);
+            assertTrue(Files.exists(mp), "Missing CraftEngine 3D model: " + m);
+        }
+
+        assertEquals(CustomPackProvider.AUTO, CustomPackProvider.fromConfig("auto"));
+        assertEquals(CustomPackProvider.ITEMSADDER, CustomPackProvider.fromConfig("ItemsAdder"));
+        assertEquals(CustomPackProvider.ITEMSADDER, CustomPackProvider.fromConfig("ia"));
+        assertEquals(CustomPackProvider.CRAFTENGINE, CustomPackProvider.fromConfig("CraftEngine"));
+        assertEquals(CustomPackProvider.CRAFTENGINE, CustomPackProvider.fromConfig("ce"));
+        assertEquals(CustomPackProvider.NEXO, CustomPackProvider.fromConfig("nexo"));
+        assertEquals(SawitItemType.SAWIT_SEED, SawitItemType.fromId("nusasawit:sawit_seed"));
+        assertEquals(SawitItemType.EGREK_MASTER, SawitItemType.fromId("nusasawit:egrek_master"));
     }
 }

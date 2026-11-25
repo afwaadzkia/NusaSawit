@@ -1,0 +1,5 @@
+enable: true
+author: NusaSpigot
+version: "1.1.0"
+namespace: nusasawit
+description: "NusaSawit 3D Oil Palm Plantation models & custom items for CraftEngine"
