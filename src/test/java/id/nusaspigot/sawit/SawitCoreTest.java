@@ -178,7 +178,12 @@ class SawitCoreTest {
         assertTrue(Files.exists(ceRoot.resolve("configuration/nusasawit.yml")), "Missing CraftEngine configuration/nusasawit.yml");
         String ceYaml = Files.readString(ceRoot.resolve("configuration/nusasawit.yml"));
         assertTrue(ceYaml.contains("nusasawit:sawit_stage_3_ripe"));
+        assertTrue(ceYaml.contains("is_bedrock_player"));
         assertTrue(ceYaml.contains("furniture:"));
+
+        // Verify bundled Geyser Bedrock 3D pack & custom mappings
+        assertTrue(Files.exists(Path.of("bedrock-pack/NusaSawit_Bedrock.mcpack")), "Missing NusaSawit_Bedrock.mcpack");
+        assertTrue(Files.exists(Path.of("bedrock-pack/custom_mappings/nusasawit.json")), "Missing Geyser nusasawit.json");
 
         for (String rel : pngs) {
             Path p = ceRoot.resolve("resourcepack/assets/nusasawit/textures/" + rel);

@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "id.nusaspigot.sawit"
-version = "1.1.0"
+version = "1.1.1"
 
 java {
     toolchain {
@@ -56,6 +56,9 @@ tasks.processResources {
     }
     from("craftengine-pack") {
         into("craftengine-pack")
+    }
+    from("bedrock-pack") {
+        into("bedrock-pack")
     }
 }
 

@@ -81,6 +81,7 @@ public final class CustomPackHook {
         exportNexoPackTo(plugin.getDataFolder().toPath().resolve("nexo-pack"), false);
         exportItemsAdderPackTo(plugin.getDataFolder().toPath().resolve("itemsadder-pack"), false);
         exportCraftEnginePackTo(plugin.getDataFolder().toPath().resolve("craftengine-pack"), false);
+        exportBedrockPackTo(plugin.getDataFolder().toPath().resolve("bedrock-pack"), false);
 
         if (nexoPlugin != null && config.autoSyncNexoPack()) {
             int copied = syncToNexoFolder(config.overwriteExistingNexoPack());
@@ -240,6 +241,21 @@ public final class CustomPackHook {
                 overwrite
             );
         }
+        return copied;
+    }
+
+    public int exportBedrockPackTo(Path bedrockRoot, boolean overwrite) {
+        int copied = 0;
+        copied += copyResource(
+            "bedrock-pack/NusaSawit_Bedrock.mcpack",
+            bedrockRoot.resolve("NusaSawit_Bedrock.mcpack"),
+            overwrite
+        );
+        copied += copyResource(
+            "bedrock-pack/custom_mappings/nusasawit.json",
+            bedrockRoot.resolve("custom_mappings/nusasawit.json"),
+            overwrite
+        );
         return copied;
     }
 

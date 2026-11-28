@@ -1,0 +1,132 @@
+{
+  "format_version": 2,
+  "items": {
+    "minecraft:paper": [
+      {
+        "type": "definition",
+        "model": "nusasawit:sawit_seed",
+        "bedrock_identifier": "nusasawit:sawit_seed",
+        "display_name": "Bibit Sawit Tenera",
+        "bedrock_options": {
+          "icon": "nusasawit_sawit_seed"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "nusasawit:sawit_tbs",
+        "bedrock_identifier": "nusasawit:sawit_tbs",
+        "display_name": "Tandan Buah Segar (TBS)",
+        "bedrock_options": {
+          "icon": "nusasawit_sawit_tbs"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "nusasawit:sawit_tbs_super",
+        "bedrock_identifier": "nusasawit:sawit_tbs_super",
+        "display_name": "TBS Tenera Super",
+        "bedrock_options": {
+          "icon": "nusasawit_sawit_tbs_super"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "nusasawit:sawit_cpo",
+        "bedrock_identifier": "nusasawit:sawit_cpo",
+        "display_name": "Minyak Sawit Mentah (CPO)",
+        "bedrock_options": {
+          "icon": "nusasawit_sawit_cpo"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "nusasawit:pupuk_npk",
+        "bedrock_identifier": "nusasawit:pupuk_npk",
+        "display_name": "Pupuk NPK Sawit",
+        "bedrock_options": {
+          "icon": "nusasawit_pupuk_npk"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "nusasawit:sawit_crate",
+        "bedrock_identifier": "nusasawit:sawit_crate",
+        "display_name": "Peti Gudang TBS",
+        "bedrock_options": {
+          "icon": "nusasawit_sawit_crate"
+        }
+      }
+    ],
+    "minecraft:iron_hoe": [
+      {
+        "type": "definition",
+        "model": "nusasawit:egrek_sawit",
+        "bedrock_identifier": "nusasawit:egrek_sawit",
+        "display_name": "Egrek Panen Sawit",
+        "bedrock_options": {
+          "icon": "nusasawit_egrek_sawit",
+          "display_handheld": true
+        }
+      }
+    ],
+    "minecraft:golden_hoe": [
+      {
+        "type": "definition",
+        "model": "nusasawit:egrek_master",
+        "bedrock_identifier": "nusasawit:egrek_master",
+        "display_name": "Egrek Baja Nusantara",
+        "bedrock_options": {
+          "icon": "nusasawit_egrek_master",
+          "display_handheld": true
+        }
+      }
+    ],
+    "minecraft:turtle_helmet": [
+      {
+        "type": "definition",
+        "model": "nusasawit:sawit_stage_1",
+        "bedrock_identifier": "nusasawit:sawit_stage_1",
+        "display_name": "Tunas Kelapa Sawit (Tahap 1)",
+        "bedrock_options": {
+          "icon": "nusasawit_sawit_seed"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "nusasawit:sawit_stage_2",
+        "bedrock_identifier": "nusasawit:sawit_stage_2",
+        "display_name": "Pohon Sawit Muda (Tahap 2)",
+        "bedrock_options": {
+          "icon": "nusasawit_sawit_seed"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "nusasawit:sawit_stage_3_growing",
+        "bedrock_identifier": "nusasawit:sawit_stage_3_growing",
+        "display_name": "Pohon Sawit Dewasa (Berbunga)",
+        "bedrock_options": {
+          "icon": "nusasawit_sawit_seed"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "nusasawit:sawit_stage_3_ripe",
+        "bedrock_identifier": "nusasawit:sawit_stage_3_ripe",
+        "display_name": "Pohon Sawit Siap Panen",
+        "bedrock_options": {
+          "icon": "nusasawit_sawit_tbs"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "nusasawit:sawit_crate_display",
+        "bedrock_identifier": "nusasawit:sawit_crate_display",
+        "display_name": "Peti Gudang TBS (3D)",
+        "bedrock_options": {
+          "icon": "nusasawit_sawit_crate"
+        }
+      }
+    ]
+  }
+}

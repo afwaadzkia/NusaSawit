@@ -57,6 +57,10 @@ Plugin perkebunan kelapa sawit modern untuk **NusaSpigot / Paper 1.21.11** (Java
      ```text
      /ce reload all
      ```
+   - **Pengguna Geyser / Bedrock Edition (Tanpa Ekstensi Tambahan)**: Tersedia paket 3D Bedrock siap pakai di [`bedrock-pack/`](bedrock-pack/) (juga diekspor otomatis ke `plugins/NusaSawit/bedrock-pack/`):
+     - Salin `bedrock-pack/NusaSawit_Bedrock.mcpack` ke folder `packs/` Geyser.
+     - Salin `bedrock-pack/custom_mappings/nusasawit.json` ke folder `custom_mappings/` Geyser.
+     - Pada CraftEngine, konfigurasi otomatis menampilkan `item_display` ke pemain Java dan model 3D `armor_stand` + `.geo.json` attachable ke pemain Bedrock (`is_bedrock_player`).
 
 ---
 

@@ -1,5 +1,6 @@
 # ============================================================================
 # NusaSawit - Custom CraftEngine Items & 3D Furniture Configuration
+# Supports BOTH Java Edition (item_display) AND Bedrock Geyser (armor_stand)
 # Auto-synced into `plugins/CraftEngine/resources/nusasawit/` — run:
 #   /ce reload all
 # ============================================================================
@@ -20,28 +21,34 @@ items:
         - "<!i><gold>Klik Kanan Tanah <dark_gray>- <green>Menanam Bibit"
 
   nusasawit:sawit_stage_1:
-    material: paper
+    material: turtle_helmet
     model: nusasawit:block/sawit_stage_1
     data:
       item-name: "<!i><green>Tunas Kelapa Sawit (Tahap 1)"
 
   nusasawit:sawit_stage_2:
-    material: paper
+    material: turtle_helmet
     model: nusasawit:block/sawit_stage_2
     data:
       item-name: "<!i><green>Pohon Sawit Muda (Tahap 2)"
 
   nusasawit:sawit_stage_3_growing:
-    material: paper
+    material: turtle_helmet
     model: nusasawit:block/sawit_stage_3_growing
     data:
       item-name: "<!i><dark_green>Pohon Sawit Dewasa (Berbunga)"
 
   nusasawit:sawit_stage_3_ripe:
-    material: paper
+    material: turtle_helmet
     model: nusasawit:block/sawit_stage_3_ripe
     data:
       item-name: "<!i><gold><bold>Pohon Sawit Siap Panen</bold></gold>"
+
+  nusasawit:sawit_crate_display:
+    material: turtle_helmet
+    model: nusasawit:block/sawit_crate
+    data:
+      item-name: "<!i><gold><bold>Peti Gudang TBS</bold></gold>"
 
   nusasawit:sawit_tbs:
     material: paper
@@ -146,12 +153,23 @@ furniture:
     variants:
       ground:
         elements:
-          - item: nusasawit:sawit_stage_1
+          - type: item_display
+            item: nusasawit:sawit_stage_1
             display-transform: NONE
             position: 0,0.5,0
             scale: 1.1,1.1,1.1
             translation: 0,0.05,0
             view-range: 2.0
+            conditions:
+              - type: inverted
+                term:
+                  type: is_bedrock_player
+          - type: armor_stand
+            item: nusasawit:sawit_stage_1
+            position: 0,0,0
+            scale: 1.0
+            conditions:
+              - type: is_bedrock_player
         hitboxes:
           - type: interaction
             position: 0,0,0
@@ -164,12 +182,23 @@ furniture:
     variants:
       ground:
         elements:
-          - item: nusasawit:sawit_stage_2
+          - type: item_display
+            item: nusasawit:sawit_stage_2
             display-transform: NONE
             position: 0,0.5,0
             scale: 2.0,2.0,2.0
             translation: 0,0.5,0
             view-range: 2.0
+            conditions:
+              - type: inverted
+                term:
+                  type: is_bedrock_player
+          - type: armor_stand
+            item: nusasawit:sawit_stage_2
+            position: 0,0,0
+            scale: 1.0
+            conditions:
+              - type: is_bedrock_player
         hitboxes:
           - type: interaction
             position: 0,0,0
@@ -182,12 +211,23 @@ furniture:
     variants:
       ground:
         elements:
-          - item: nusasawit:sawit_stage_3_growing
+          - type: item_display
+            item: nusasawit:sawit_stage_3_growing
             display-transform: NONE
             position: 0,0.5,0
             scale: 3.2,3.2,3.2
             translation: 0,1.1,0
             view-range: 2.5
+            conditions:
+              - type: inverted
+                term:
+                  type: is_bedrock_player
+          - type: armor_stand
+            item: nusasawit:sawit_stage_3_growing
+            position: 0,0,0
+            scale: 1.0
+            conditions:
+              - type: is_bedrock_player
         hitboxes:
           - type: interaction
             position: 0,0,0
@@ -200,12 +240,23 @@ furniture:
     variants:
       ground:
         elements:
-          - item: nusasawit:sawit_stage_3_ripe
+          - type: item_display
+            item: nusasawit:sawit_stage_3_ripe
             display-transform: NONE
             position: 0,0.5,0
             scale: 3.2,3.2,3.2
             translation: 0,1.1,0
             view-range: 2.5
+            conditions:
+              - type: inverted
+                term:
+                  type: is_bedrock_player
+          - type: armor_stand
+            item: nusasawit:sawit_stage_3_ripe
+            position: 0,0,0
+            scale: 1.0
+            conditions:
+              - type: is_bedrock_player
         hitboxes:
           - type: interaction
             position: 0,0,0
@@ -218,12 +269,23 @@ furniture:
     variants:
       ground:
         elements:
-          - item: nusasawit:sawit_crate
+          - type: item_display
+            item: nusasawit:sawit_crate
             display-transform: NONE
             position: 0,0.5,0
             scale: 1.0,1.0,1.0
             translation: 0,0,0
             view-range: 2.0
+            conditions:
+              - type: inverted
+                term:
+                  type: is_bedrock_player
+          - type: armor_stand
+            item: nusasawit:sawit_crate_display
+            position: 0,0,0
+            scale: 1.0
+            conditions:
+              - type: is_bedrock_player
         hitboxes:
           - type: shulker
             position: 0,0,0
